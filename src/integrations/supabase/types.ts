@@ -14,7 +14,120 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      match_requests: {
+        Row: {
+          created_at: string
+          id: string
+          requester_id: string
+          skill: string
+          status: string | null
+          teacher_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          requester_id: string
+          skill: string
+          status?: string | null
+          teacher_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          requester_id?: string
+          skill?: string
+          status?: string | null
+          teacher_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          hostel: string
+          id: string
+          name: string
+          points: number | null
+          rating: number | null
+          updated_at: string
+          user_id: string
+          year: number
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          hostel: string
+          id?: string
+          name: string
+          points?: number | null
+          rating?: number | null
+          updated_at?: string
+          user_id: string
+          year: number
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          hostel?: string
+          id?: string
+          name?: string
+          points?: number | null
+          rating?: number | null
+          updated_at?: string
+          user_id?: string
+          year?: number
+        }
+        Relationships: []
+      }
+      skills_to_learn: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          skill: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          skill: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          skill?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      skills_to_teach: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          skill: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          skill: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          skill?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
