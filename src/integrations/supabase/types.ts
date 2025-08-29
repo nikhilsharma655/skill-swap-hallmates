@@ -130,48 +130,14 @@ export type Database = {
       }
     }
     Views: {
-      public_profiles: {
-        Row: {
-          created_at: string | null
-          hostel: string | null
-          id: string | null
-          name: string | null
-          points: number | null
-          rating: number | null
-          updated_at: string | null
-          user_id: string | null
-          year: number | null
-        }
-        Insert: {
-          created_at?: string | null
-          hostel?: string | null
-          id?: string | null
-          name?: string | null
-          points?: number | null
-          rating?: number | null
-          updated_at?: string | null
-          user_id?: string | null
-          year?: number | null
-        }
-        Update: {
-          created_at?: string | null
-          hostel?: string | null
-          id?: string | null
-          name?: string | null
-          points?: number | null
-          rating?: number | null
-          updated_at?: string | null
-          user_id?: string | null
-          year?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
-      get_public_profiles: {
+      get_current_user_profile: {
         Args: Record<PropertyKey, never>
         Returns: {
           created_at: string
+          email: string
           hostel: string
           id: string
           name: string

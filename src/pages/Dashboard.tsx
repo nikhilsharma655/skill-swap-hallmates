@@ -62,10 +62,9 @@ const Dashboard = () => {
   };
 
   const loadProfile = async (userId: string) => {
+    // Use the secure RPC function to get current user's profile with email
     const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("user_id", userId)
+      .rpc('get_current_user_profile')
       .maybeSingle();
 
     if (error) {
