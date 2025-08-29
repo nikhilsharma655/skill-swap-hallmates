@@ -130,36 +130,7 @@ export type Database = {
       }
     }
     Views: {
-      public_profiles: {
-        Row: {
-          hostel: string | null
-          id: string | null
-          name: string | null
-          points: number | null
-          rating: number | null
-          user_id: string | null
-          year: number | null
-        }
-        Insert: {
-          hostel?: string | null
-          id?: string | null
-          name?: string | null
-          points?: number | null
-          rating?: number | null
-          user_id?: string | null
-          year?: number | null
-        }
-        Update: {
-          hostel?: string | null
-          id?: string | null
-          name?: string | null
-          points?: number | null
-          rating?: number | null
-          user_id?: string | null
-          year?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       get_current_user_profile: {
