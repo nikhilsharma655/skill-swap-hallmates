@@ -130,10 +130,58 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_profiles: {
+        Row: {
+          created_at: string | null
+          hostel: string | null
+          id: string | null
+          name: string | null
+          points: number | null
+          rating: number | null
+          updated_at: string | null
+          user_id: string | null
+          year: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          hostel?: string | null
+          id?: string | null
+          name?: string | null
+          points?: number | null
+          rating?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          year?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          hostel?: string | null
+          id?: string | null
+          name?: string | null
+          points?: number | null
+          rating?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          year?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      get_public_profiles: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          hostel: string
+          id: string
+          name: string
+          points: number
+          rating: number
+          updated_at: string
+          user_id: string
+          year: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
