@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import Navigation from "@/components/Navigation";
-import { Users, BookOpen, Star, Zap, Target, Globe, ArrowRight, Sparkles } from "lucide-react";
+import { Users, BookOpen, Star, Zap, Target, Globe, ArrowRight, Sparkles, Search, CheckCircle, Heart, Award, Shield } from "lucide-react";
 
 const Index = () => {
   return (
@@ -10,79 +11,116 @@ const Index = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 -z-10" />
-        <div className="max-w-5xl mx-auto space-y-8">
-          <div className="flex items-center justify-center gap-2 text-primary mb-4">
-            <Sparkles className="w-6 h-6" />
-            <span className="text-sm font-medium uppercase tracking-wide">Welcome to SkillSwap</span>
-            <Sparkles className="w-6 h-6" />
-          </div>
-          <h1 className="text-6xl md:text-7xl font-bold leading-tight">
-            <span className="gradient-text">Connect.</span>{" "}
-            <span className="gradient-text">Learn.</span>{" "}
-            <span className="gradient-text">Grow.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            The ultimate platform for hostel students to exchange knowledge, build skills, 
-            and create lasting connections through peer-to-peer learning.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Button size="lg" className="group glow-effect" asChild>
-              <Link to="/auth" className="flex items-center gap-2">
-                Get Started
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="glass-effect" asChild>
-              <Link to="/matches">Explore Skills</Link>
-            </Button>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 hero-gradient -z-10" />
+        <div className="container mx-auto px-6 py-24 text-center relative">
+          <div className="max-w-6xl mx-auto space-y-10">
+            <div className="flex items-center justify-center gap-3 text-primary mb-6 fade-in-up">
+              <Sparkles className="w-6 h-6 bounce-soft" />
+              <span className="text-sm font-semibold uppercase tracking-wider bg-primary-soft px-4 py-2 rounded-full">
+                Welcome to SkillSwap
+              </span>
+              <Sparkles className="w-6 h-6 bounce-soft" />
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight fade-in-up">
+              <span className="gradient-text">Connect.</span>{" "}
+              <span className="gradient-text">Learn.</span>{" "}
+              <span className="gradient-text">Grow.</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed fade-in-up">
+              The ultimate platform for hostel students to exchange knowledge, build skills, 
+              and create lasting connections through peer-to-peer learning.
+            </p>
+
+            {/* Search Bar */}
+            <div className="max-w-md mx-auto relative fade-in-up">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+              <Input 
+                placeholder="Search for skills..." 
+                className="pl-12 h-14 text-lg rounded-full border-border/20 bg-background/60 backdrop-blur-sm"
+              />
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8 fade-in-up">
+              <Button 
+                size="lg" 
+                className="group rounded-full px-8 py-6 text-lg font-semibold bg-gradient-to-r from-primary to-primary-glow hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl" 
+                asChild
+              >
+                <Link to="/auth" className="flex items-center gap-2">
+                  Get Started
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="rounded-full px-8 py-6 text-lg font-semibold bg-background/60 backdrop-blur-sm border-border/20 hover:bg-background/80 transition-all duration-300" 
+                asChild
+              >
+                <Link to="/matches">Explore Skills</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose SkillSwap?</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+      {/* Why Choose SkillSwap Section */}
+      <section className="py-24 bg-gradient-to-b from-background to-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 gradient-text">Why Choose SkillSwap?</h2>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Discover the features that make learning and teaching seamless
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="card-hover border-0 card-shadow bg-gradient-to-br from-card to-background">
-              <CardHeader className="text-center pb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-glow rounded-2xl flex items-center justify-center mx-auto mb-4 glow-effect">
-                  <Users className="w-8 h-8 text-primary-foreground" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="card-hover border-0 card-shadow floating-card group">
+              <CardHeader className="text-center pb-8 pt-8">
+                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Users className="w-10 h-10 text-primary-foreground" />
                 </div>
-                <CardTitle className="text-2xl">Connect Locally</CardTitle>
-                <CardDescription className="text-base">
-                  Find learning partners right in your hostel community for immediate collaboration
+                <CardTitle className="text-2xl font-bold mb-3">Peer-to-Peer Learning</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
+                  Connect with fellow students for authentic, collaborative learning experiences
                 </CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="card-hover border-0 card-shadow bg-gradient-to-br from-card to-background">
-              <CardHeader className="text-center pb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-glow rounded-2xl flex items-center justify-center mx-auto mb-4 glow-effect">
-                  <BookOpen className="w-8 h-8 text-primary-foreground" />
+            <Card className="card-hover border-0 card-shadow floating-card group">
+              <CardHeader className="text-center pb-8 pt-8">
+                <div className="w-20 h-20 bg-gradient-to-br from-success to-success/80 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Target className="w-10 h-10 text-white" />
                 </div>
-                <CardTitle className="text-2xl">Skill Exchange</CardTitle>
-                <CardDescription className="text-base">
-                  Create a perfect balance - teach what you know, learn what you need
+                <CardTitle className="text-2xl font-bold mb-3">Build Real Skills</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
+                  Learn practical skills that matter for your career and personal growth
                 </CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="card-hover border-0 card-shadow bg-gradient-to-br from-card to-background">
-              <CardHeader className="text-center pb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-glow rounded-2xl flex items-center justify-center mx-auto mb-4 glow-effect">
-                  <Star className="w-8 h-8 text-primary-foreground" />
+            <Card className="card-hover border-0 card-shadow floating-card group">
+              <CardHeader className="text-center pb-8 pt-8">
+                <div className="w-20 h-20 bg-gradient-to-br from-info to-info/80 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Shield className="w-10 h-10 text-white" />
                 </div>
-                <CardTitle className="text-2xl">Build Reputation</CardTitle>
-                <CardDescription className="text-base">
-                  Earn points and ratings as you help others grow and build your learning profile
+                <CardTitle className="text-2xl font-bold mb-3">Verified Community</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
+                  Safe, trusted environment with verified student profiles and ratings
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            
+            <Card className="card-hover border-0 card-shadow floating-card group">
+              <CardHeader className="text-center pb-8 pt-8">
+                <div className="w-20 h-20 bg-gradient-to-br from-warning to-warning/80 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Heart className="w-10 h-10 text-white" />
+                </div>
+                <CardTitle className="text-2xl font-bold mb-3">Fun & Engaging</CardTitle>
+                <CardDescription className="text-base leading-relaxed">
+                  Gamified learning with points, achievements, and social features
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -91,50 +129,50 @@ const Index = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+      <section className="py-24 bg-gradient-to-r from-muted/20 to-background">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 gradient-text">How It Works</h2>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Three simple steps to start your learning journey
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-            <div className="text-center space-y-6 group">
+          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
+            <div className="text-center space-y-8 group">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-3xl flex items-center justify-center mx-auto glow-effect group-hover:scale-110 transition-transform duration-300">
-                  <Target className="w-10 h-10 text-primary-foreground" />
+                <div className="w-24 h-24 bg-gradient-to-br from-primary to-primary-glow rounded-full flex items-center justify-center mx-auto shadow-2xl group-hover:scale-110 transition-all duration-500">
+                  <Target className="w-12 h-12 text-primary-foreground" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-accent to-info rounded-full flex items-center justify-center text-lg font-black text-white shadow-lg">1</div>
               </div>
-              <h3 className="text-2xl font-bold">Set Your Skills</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <h3 className="text-3xl font-black">Set Your Skills</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto">
                 Add skills you want to teach and skills you want to learn to create your learning profile
               </p>
             </div>
             
-            <div className="text-center space-y-6 group">
+            <div className="text-center space-y-8 group">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-3xl flex items-center justify-center mx-auto glow-effect group-hover:scale-110 transition-transform duration-300">
-                  <Globe className="w-10 h-10 text-primary-foreground" />
+                <div className="w-24 h-24 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto shadow-2xl group-hover:scale-110 transition-all duration-500">
+                  <Globe className="w-12 h-12 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-accent to-info rounded-full flex items-center justify-center text-lg font-black text-white shadow-lg">2</div>
               </div>
-              <h3 className="text-2xl font-bold">Find Matches</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <h3 className="text-3xl font-black">Find Matches</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto">
                 Discover students in your hostel with complementary skills and learning goals
               </p>
             </div>
             
-            <div className="text-center space-y-6 group">
+            <div className="text-center space-y-8 group">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-3xl flex items-center justify-center mx-auto glow-effect group-hover:scale-110 transition-transform duration-300">
-                  <Zap className="w-10 h-10 text-primary-foreground" />
+                <div className="w-24 h-24 bg-gradient-to-br from-warning to-warning/80 rounded-full flex items-center justify-center mx-auto shadow-2xl group-hover:scale-110 transition-all duration-500">
+                  <Zap className="w-12 h-12 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-accent to-info rounded-full flex items-center justify-center text-lg font-black text-white shadow-lg">3</div>
               </div>
-              <h3 className="text-2xl font-bold">Start Learning</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <h3 className="text-3xl font-black">Start Learning</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto">
                 Connect, collaborate, and grow together through structured learning sessions
               </p>
             </div>
@@ -143,58 +181,89 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-4xl font-bold gradient-text">500+</div>
-              <div className="text-muted-foreground">Active Students</div>
+      <section className="py-24 bg-gradient-to-r from-primary/5 via-accent/10 to-primary/5">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-12 text-center">
+            <div className="space-y-4 group">
+              <div className="text-5xl md:text-6xl font-black gradient-text group-hover:scale-110 transition-transform duration-300">500+</div>
+              <div className="text-lg font-semibold text-muted-foreground">Active Students</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold gradient-text">1,200+</div>
-              <div className="text-muted-foreground">Skills Shared</div>
+            <div className="space-y-4 group">
+              <div className="text-5xl md:text-6xl font-black gradient-text group-hover:scale-110 transition-transform duration-300">1,200+</div>
+              <div className="text-lg font-semibold text-muted-foreground">Skills Shared</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold gradient-text">850+</div>
-              <div className="text-muted-foreground">Successful Matches</div>
+            <div className="space-y-4 group">
+              <div className="text-5xl md:text-6xl font-black gradient-text group-hover:scale-110 transition-transform duration-300">850+</div>
+              <div className="text-lg font-semibold text-muted-foreground">Successful Matches</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold gradient-text">4.9★</div>
-              <div className="text-muted-foreground">Average Rating</div>
+            <div className="space-y-4 group">
+              <div className="text-5xl md:text-6xl font-black gradient-text group-hover:scale-110 transition-transform duration-300">4.9★</div>
+              <div className="text-lg font-semibold text-muted-foreground">Average Rating</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+      <section className="py-24 bg-gradient-to-r from-primary via-primary-glow to-accent text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
           <div className="w-full h-full bg-repeat" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
           }} />
         </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Learning Journey?</h2>
-          <p className="text-xl md:text-2xl mb-10 opacity-90 max-w-3xl mx-auto">
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">Ready to Start Your Learning Journey?</h2>
+          <p className="text-xl md:text-2xl mb-12 opacity-95 max-w-4xl mx-auto leading-relaxed">
             Join hundreds of students already growing through SkillSwap and unlock your potential today
           </p>
-          <Button size="lg" variant="secondary" className="group text-lg px-8 py-6" asChild>
-            <Link to="/auth" className="flex items-center gap-2">
+          <Button 
+            size="lg" 
+            variant="secondary" 
+            className="group text-xl px-12 py-8 rounded-full font-bold bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-2xl" 
+            asChild
+          >
+            <Link to="/auth" className="flex items-center gap-3">
               Join SkillSwap Today
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
             </Link>
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-muted/30 py-12">
-        <div className="container mx-auto px-4 text-center">
-          <div className="text-2xl font-bold gradient-text mb-4">SkillSwap</div>
-          <p className="text-muted-foreground mb-6">Connecting minds, building futures.</p>
-          <div className="flex justify-center gap-6 text-sm text-muted-foreground">
-            <Link to="/auth" className="hover:text-primary transition-colors">Get Started</Link>
-            <Link to="/matches" className="hover:text-primary transition-colors">Find Skills</Link>
+      <footer className="bg-muted/20 py-16 border-t border-border/20">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-2">
+              <div className="text-3xl font-black gradient-text mb-4">SkillSwap</div>
+              <p className="text-muted-foreground mb-6 text-lg leading-relaxed max-w-md">
+                Made by students, for students. Connecting minds, building futures.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+              <div className="space-y-3">
+                <Link to="/auth" className="block text-muted-foreground hover:text-primary transition-colors">Get Started</Link>
+                <Link to="/matches" className="block text-muted-foreground hover:text-primary transition-colors">Explore Skills</Link>
+                <span className="block text-muted-foreground hover:text-primary transition-colors cursor-pointer">About</span>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-lg mb-4">Support</h4>
+              <div className="space-y-3">
+                <span className="block text-muted-foreground hover:text-primary transition-colors cursor-pointer">Contact</span>
+                <span className="block text-muted-foreground hover:text-primary transition-colors cursor-pointer">Privacy Policy</span>
+                <span className="block text-muted-foreground hover:text-primary transition-colors cursor-pointer">Social Media</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-border/20 pt-8 text-center">
+            <p className="text-muted-foreground">
+              © 2024 SkillSwap. Made with ❤️ by students, for students.
+            </p>
           </div>
         </div>
       </footer>

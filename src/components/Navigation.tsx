@@ -51,12 +51,28 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
+    <nav className="sticky top-0 z-50 border-b border-border/20 bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="font-bold text-xl text-primary">
+          <Link to="/" className="font-bold text-2xl gradient-text">
             SkillSwap
           </Link>
+
+          <div className="hidden md:flex items-center space-x-8">
+            {!user && (
+              <>
+                <Link to="/" className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/") ? "text-primary" : "text-muted-foreground"}`}>
+                  Home
+                </Link>
+                <Link to="/matches" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                  Explore
+                </Link>
+                <span className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                  About
+                </span>
+              </>
+            )}
+          </div>
 
           <div className="flex items-center space-x-4">
             {user ? (
@@ -65,6 +81,7 @@ const Navigation = () => {
                   variant={isActive("/dashboard") ? "default" : "ghost"}
                   size="sm"
                   asChild
+                  className="rounded-full"
                 >
                   <Link to="/dashboard" className="flex items-center gap-2">
                     <User className="w-4 h-4" />
@@ -76,6 +93,7 @@ const Navigation = () => {
                   variant={isActive("/matches") ? "default" : "ghost"}
                   size="sm"
                   asChild
+                  className="rounded-full"
                 >
                   <Link to="/matches" className="flex items-center gap-2">
                     <Users className="w-4 h-4" />
@@ -87,29 +105,31 @@ const Navigation = () => {
                   variant="ghost"
                   size="sm"
                   onClick={handleLogout}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 rounded-full"
                 >
                   <LogOut className="w-4 h-4" />
                   Logout
                 </Button>
               </>
             ) : (
-              <>
-                <Button
-                  variant={isActive("/") ? "default" : "ghost"}
-                  size="sm"
+              <div className="flex items-center space-x-3">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
                   asChild
+                  className="rounded-full"
                 >
-                  <Link to="/" className="flex items-center gap-2">
-                    <Home className="w-4 h-4" />
-                    Home
-                  </Link>
+                  <Link to="/auth">Login</Link>
                 </Button>
                 
-                <Button size="sm" asChild>
+                <Button 
+                  size="sm" 
+                  asChild
+                  className="rounded-full bg-gradient-to-r from-primary to-primary-glow hover:scale-105 transition-transform"
+                >
                   <Link to="/auth">Get Started</Link>
                 </Button>
-              </>
+              </div>
             )}
           </div>
         </div>
