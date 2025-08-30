@@ -7,15 +7,17 @@ import { Users, BookOpen, Star, Zap, Target, Globe, ArrowRight, Sparkles, Search
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen calm-background">
+      <div className="floating-shapes"></div>
       <Navigation />
       
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 hero-gradient -z-10" />
+        <div className="floating-shapes"></div>
         <div className="container mx-auto px-6 py-24 text-center relative">
           <div className="max-w-6xl mx-auto space-y-10">
-            <div className="flex items-center justify-center gap-3 text-primary mb-6 fade-in-up">
+            <div className="flex items-center justify-center gap-3 text-primary mb-6 fade-in-up breathe">
               <Sparkles className="w-6 h-6 bounce-soft" />
               <span className="text-sm font-semibold uppercase tracking-wider bg-primary-soft px-4 py-2 rounded-full">
                 Welcome to SkillSwap
@@ -39,7 +41,7 @@ const Index = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <Input 
                 placeholder="Search for skills..." 
-                className="pl-12 h-14 text-lg rounded-full border-border/20 bg-background/60 backdrop-blur-sm"
+                className="pl-12 h-14 text-lg rounded-full border-border/20 bg-background/80 backdrop-blur-xl shadow-lg"
               />
             </div>
             
@@ -57,7 +59,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="rounded-full px-8 py-6 text-lg font-semibold bg-background/60 backdrop-blur-sm border-border/20 hover:bg-background/80 transition-all duration-300" 
+                className="rounded-full px-8 py-6 text-lg font-semibold bg-background/80 backdrop-blur-xl border-border/20 hover:bg-background/90 transition-all duration-300 shadow-lg" 
                 asChild
               >
                 <Link to="/matches">Explore Skills</Link>
@@ -68,7 +70,8 @@ const Index = () => {
       </section>
 
       {/* Why Choose SkillSwap Section */}
-      <section className="py-24 bg-gradient-to-b from-background to-muted/30">
+      <section className="py-24 section-gradient relative">
+        <div className="floating-shapes"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-black mb-6 gradient-text">Why Choose SkillSwap?</h2>
@@ -129,7 +132,8 @@ const Index = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 bg-gradient-to-r from-muted/20 to-background">
+      <section className="py-24 calm-background relative">
+        <div className="floating-shapes"></div>
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-black mb-6 gradient-text">How It Works</h2>
@@ -181,7 +185,8 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-r from-primary/5 via-accent/10 to-primary/5">
+      <section className="py-24 section-gradient relative">
+        <div className="floating-shapes"></div>
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 text-center">
             <div className="space-y-4 group">
@@ -207,6 +212,7 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-r from-primary via-primary-glow to-accent text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
+          <div className="floating-shapes"></div>
           <div className="w-full h-full bg-repeat" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
           }} />
@@ -231,7 +237,8 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-muted/20 py-16 border-t border-border/20">
+      <footer className="section-gradient py-16 border-t border-border/20 relative">
+        <div className="floating-shapes"></div>
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">

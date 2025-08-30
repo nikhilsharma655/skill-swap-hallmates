@@ -8,65 +8,67 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Soft pastel backgrounds with purple/blue accents */
-    --background: 252 20% 98%;
-    --foreground: 252 20% 12%;
+    /* Calming soft backgrounds with gentle pastels */
+    --background: 250 35% 99%;
+    --foreground: 250 20% 15%;
 
-    --card: 253 25% 99%;
-    --card-foreground: 252 20% 12%;
+    --card: 255 40% 99%;
+    --card-foreground: 250 20% 15%;
 
-    --popover: 253 25% 99%;
-    --popover-foreground: 252 20% 12%;
+    --popover: 255 40% 99%;
+    --popover-foreground: 250 20% 15%;
 
-    /* Modern purple-blue gradient system */
-    --primary: 262 83% 65%;
+    /* Soothing purple-blue palette */
+    --primary: 260 85% 68%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 262 83% 75%;
-    --primary-soft: 262 83% 95%;
+    --primary-glow: 260 85% 78%;
+    --primary-soft: 260 85% 97%;
 
-    --secondary: 210 20% 94%;
-    --secondary-foreground: 252 20% 12%;
+    --secondary: 220 25% 96%;
+    --secondary-foreground: 250 20% 15%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 50%;
+    --muted: 220 25% 97%;
+    --muted-foreground: 215 16% 55%;
 
-    --accent: 195 85% 88%;
-    --accent-foreground: 252 20% 12%;
+    --accent: 200 90% 92%;
+    --accent-foreground: 250 20% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 262 83% 65%;
+    --border: 220 20% 93%;
+    --input: 220 20% 95%;
+    --ring: 260 85% 68%;
 
-    --success: 142 76% 36%;
-    --warning: 38 92% 50%;
-    --info: 199 89% 48%;
+    --success: 145 70% 45%;
+    --warning: 40 90% 60%;
+    --info: 200 85% 55%;
 
-    /* Beautiful gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(262 83% 95%), hsl(195 85% 95%));
-    --gradient-card: linear-gradient(145deg, hsl(253 25% 99%), hsl(252 20% 98%));
-    --gradient-cta: linear-gradient(135deg, hsl(262 83% 65%), hsl(195 85% 70%));
+    /* Calming gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(260 85% 68%), hsl(260 85% 78%));
+    --gradient-hero: linear-gradient(135deg, hsl(250 35% 99%), hsl(220 50% 97%), hsl(200 60% 96%));
+    --gradient-section: linear-gradient(180deg, hsl(255 40% 99%), hsl(250 35% 98%));
+    --gradient-calm: linear-gradient(45deg, hsl(200 60% 96%), hsl(250 40% 97%), hsl(280 30% 96%));
+    --gradient-card: linear-gradient(145deg, hsl(255 40% 99%), hsl(250 35% 98%));
+    --gradient-cta: linear-gradient(135deg, hsl(260 85% 68%), hsl(200 85% 70%));
 
-    /* Elegant shadows */
-    --shadow-sm: 0 1px 3px 0 hsl(252 20% 12% / 0.08);
-    --shadow-md: 0 4px 12px -2px hsl(252 20% 12% / 0.08), 0 2px 6px -1px hsl(252 20% 12% / 0.04);
-    --shadow-lg: 0 12px 24px -4px hsl(252 20% 12% / 0.12), 0 4px 8px -2px hsl(252 20% 12% / 0.06);
-    --shadow-glow: 0 0 32px hsl(var(--primary) / 0.25);
-    --shadow-card: 0 8px 32px -8px hsl(252 20% 12% / 0.08);
+    /* Soft, calming shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(250 20% 15% / 0.06);
+    --shadow-md: 0 6px 20px -4px hsl(250 20% 15% / 0.08), 0 2px 8px -2px hsl(250 20% 15% / 0.04);
+    --shadow-lg: 0 16px 40px -8px hsl(250 20% 15% / 0.1), 0 4px 12px -4px hsl(250 20% 15% / 0.06);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 12px 40px -12px hsl(250 20% 15% / 0.06);
 
-    --radius: 1rem;
+    --radius: 1.25rem;
 
-    --sidebar-background: 253 25% 99%;
-    --sidebar-foreground: 252 20% 26%;
-    --sidebar-primary: 262 83% 65%;
+    --sidebar-background: 255 40% 99%;
+    --sidebar-foreground: 250 20% 26%;
+    --sidebar-primary: 260 85% 68%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 20% 96%;
-    --sidebar-accent-foreground: 252 20% 12%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 262 83% 65%;
+    --sidebar-accent: 220 25% 96%;
+    --sidebar-accent-foreground: 250 20% 15%;
+    --sidebar-border: 220 20% 93%;
+    --sidebar-ring: 260 85% 68%;
   }
 
   .dark {
@@ -161,11 +163,19 @@ All colors MUST be HSL.
   }
 
   .glass-effect {
-    @apply backdrop-blur-sm bg-background/80 border border-border/50;
+    @apply backdrop-blur-xl bg-background/60 border border-border/30;
   }
 
   .hero-gradient {
     background: var(--gradient-hero);
+  }
+
+  .calm-gradient {
+    background: var(--gradient-calm);
+  }
+
+  .section-gradient {
+    background: var(--gradient-section);
   }
 
   .button-primary {
@@ -174,20 +184,80 @@ All colors MUST be HSL.
   }
 
   .floating-card {
-    @apply bg-card/60 backdrop-blur-md border border-border/20 rounded-2xl shadow-card;
+    @apply bg-card/70 backdrop-blur-xl border border-border/20 rounded-2xl shadow-card;
+  }
+
+  .calm-background {
+    position: relative;
+    background: var(--gradient-calm);
+  }
+
+  .calm-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 80%, hsl(200 60% 95% / 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(260 50% 95% / 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, hsl(220 60% 96% / 0.2) 0%, transparent 50%);
+    z-index: -1;
+  }
+
+  .floating-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .floating-shapes::before,
+  .floating-shapes::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .floating-shapes::before {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, hsl(260 60% 90% / 0.1), transparent);
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .floating-shapes::after {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, hsl(200 70% 92% / 0.1), transparent);
+    top: 60%;
+    right: 15%;
+    animation-delay: 10s;
   }
 
   .bounce-soft {
-    animation: bounce-soft 3s ease-in-out infinite;
+    animation: bounce-soft 4s ease-in-out infinite;
   }
 
   @keyframes bounce-soft {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% { 
+      transform: translateY(-20px) rotate(180deg);
+      opacity: 0.6;
+    }
   }
 
   .fade-in-up {
-    animation: fade-in-up 0.8s ease-out forwards;
+    animation: fade-in-up 1s ease-out forwards;
     opacity: 0;
     transform: translateY(30px);
   }
@@ -196,6 +266,21 @@ All colors MUST be HSL.
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  .breathe {
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { 
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% { 
+      transform: scale(1.05);
+      opacity: 1;
     }
   }
 }
