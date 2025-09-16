@@ -148,6 +148,20 @@ export type Database = {
           year: number
         }[]
       }
+      get_user_requests: {
+        Args: { user_id_param: string }
+        Returns: {
+          created_at: string
+          id: string
+          request_type: string
+          requester_email: string
+          requester_hostel: string
+          requester_name: string
+          requester_year: number
+          skill: string
+          status: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
