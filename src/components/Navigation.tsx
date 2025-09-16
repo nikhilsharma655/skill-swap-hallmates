@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Home, User, Users, LogOut } from "lucide-react";
+import { Home, User, Users, LogOut, MessageSquare } from "lucide-react";
 
 const Navigation = () => {
   const [user, setUser] = useState<any>(null);
@@ -98,6 +98,18 @@ const Navigation = () => {
                   <Link to="/matches" className="flex items-center gap-2">
                     <Users className="w-4 h-4" />
                     Find Partners
+                  </Link>
+                </Button>
+
+                <Button
+                  variant={isActive("/requests") ? "default" : "ghost"}
+                  size="sm"
+                  asChild
+                  className="rounded-full"
+                >
+                  <Link to="/requests" className="flex items-center gap-2">
+                    <MessageSquare className="w-4 h-4" />
+                    Requests
                   </Link>
                 </Button>
 
