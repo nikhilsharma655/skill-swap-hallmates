@@ -10,6 +10,7 @@ import Navigation from "@/components/Navigation";
 
 interface Match {
   id: string;
+  userId: string; // Add userId field for the teacher_id
   name: string;
   hostel: string;
   year: number;
@@ -105,6 +106,7 @@ const Matches = () => {
           if (!userMatches.has(userId)) {
             userMatches.set(userId, {
               id: profile.id,
+              userId: profile.user_id, // Store the user_id for teacher_id
               name: profile.name,
               hostel: profile.hostel,
               year: profile.year,
@@ -255,11 +257,11 @@ const Matches = () => {
                           key={skill}
                           size="sm"
                           className="w-full text-xs"
-                          onClick={() => sendLearningRequest(match.id, skill)}
-                          disabled={requestingSkills.has(`${match.id}-${skill}`)}
+                          onClick={() => sendLearningRequest(match.userId, skill)}
+                          disabled={requestingSkills.has(`${match.userId}-${skill}`)}
                         >
                           <Send className="w-3 h-3 mr-1" />
-                          {requestingSkills.has(`${match.id}-${skill}`) 
+                          {requestingSkills.has(`${match.userId}-${skill}`) 
                             ? "Sending..." 
                             : `Request to learn ${skill}`
                           }
