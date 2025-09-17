@@ -2,20 +2,46 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Home, User, Users, LogOut, MessageSquare } from "lucide-react";
 
 const Navigation = () => {
   const [user, setUser] = useState<any>(null);
+  const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
+
+  const fetchPendingRequestsCount = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('match_requests')
+        .select('id')
+        .eq('teacher_id', userId)
+        .eq('status', 'pending');
+
+      if (error) {
+        console.error('Error fetching pending requests count:', error);
+        return;
+      }
+
+      setPendingRequestsCount(data?.length || 0);
+    } catch (error) {
+      console.error('Error fetching pending requests count:', error);
+    }
+  };
 
   useEffect(() => {
     // Get initial session
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchPendingRequestsCount(session.user.id);
+      } else {
+        setPendingRequestsCount(0);
+      }
     };
     getSession();
 
@@ -23,11 +49,42 @@ const Navigation = () => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchPendingRequestsCount(session.user.id);
+        } else {
+          setPendingRequestsCount(0);
+        }
       }
     );
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Set up real-time subscription for new requests
+  useEffect(() => {
+    if (!user) return;
+
+    const channel = supabase
+      .channel('match_requests_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'match_requests',
+          filter: `teacher_id=eq.${user.id}`
+        },
+        () => {
+          // Refetch count when requests change
+          fetchPendingRequestsCount(user.id);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user]);
 
   const handleLogout = async () => {
     try {
@@ -105,11 +162,19 @@ const Navigation = () => {
                   variant={isActive("/requests") ? "default" : "ghost"}
                   size="sm"
                   asChild
-                  className="rounded-full"
+                  className="rounded-full relative"
                 >
                   <Link to="/requests" className="flex items-center gap-2">
                     <MessageSquare className="w-4 h-4" />
                     Requests
+                    {pendingRequestsCount > 0 && (
+                      <Badge 
+                        variant="destructive" 
+                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px]"
+                      >
+                        {pendingRequestsCount > 99 ? '99+' : pendingRequestsCount}
+                      </Badge>
+                    )}
                   </Link>
                 </Button>
 
