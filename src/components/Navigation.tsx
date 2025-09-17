@@ -13,22 +13,22 @@ const Navigation = () => {
   const location = useLocation();
   const { toast } = useToast();
 
-  const fetchPendingRequestsCount = async (userId: string) => {
+  const fetchRequestsCount = async (userId: string) => {
     try {
       const { data, error } = await supabase
         .from('match_requests')
         .select('id')
         .eq('teacher_id', userId)
-        .eq('status', 'pending');
+        .in('status', ['pending', 'accepted']);
 
       if (error) {
-        console.error('Error fetching pending requests count:', error);
+        console.error('Error fetching requests count:', error);
         return;
       }
 
       setPendingRequestsCount(data?.length || 0);
     } catch (error) {
-      console.error('Error fetching pending requests count:', error);
+      console.error('Error fetching requests count:', error);
     }
   };
 
@@ -38,7 +38,7 @@ const Navigation = () => {
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchPendingRequestsCount(session.user.id);
+        fetchRequestsCount(session.user.id);
       } else {
         setPendingRequestsCount(0);
       }
@@ -50,7 +50,7 @@ const Navigation = () => {
       (event, session) => {
         setUser(session?.user ?? null);
         if (session?.user) {
-          fetchPendingRequestsCount(session.user.id);
+          fetchRequestsCount(session.user.id);
         } else {
           setPendingRequestsCount(0);
         }
@@ -76,7 +76,7 @@ const Navigation = () => {
         },
         () => {
           // Refetch count when requests change
-          fetchPendingRequestsCount(user.id);
+          fetchRequestsCount(user.id);
         }
       )
       .subscribe();
