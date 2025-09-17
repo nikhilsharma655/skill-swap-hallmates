@@ -67,66 +67,72 @@ const Matches = () => {
 
       const skillsToLearn = learnSkills.map(s => s.skill.toLowerCase());
 
-      // Get all users who can teach these skills (excluding current user)
+      // Get all teaching skills (excluding current user) and match by exact skill name (case-insensitive)
       const { data: teachSkills, error: teachError } = await supabase
-        .from("skills_to_teach")
-        .select(`
-          skill,
-          user_id,
-          profiles (
-            id,
-            name,
-            hostel,
-            year,
-            rating,
-            points,
-            user_id
-          )
-        `)
-        .neq("user_id", userId);
+        .from('skills_to_teach')
+        .select('skill,user_id')
+        .neq('user_id', userId);
 
       if (teachError) {
-        console.error("Error fetching teach skills:", teachError);
+        console.error('Error fetching teach skills:', teachError);
         return;
       }
 
-      // Process matches
-      const userMatches = new Map<string, Match>();
+      // Build maps of teacher -> all skills and matching skills
+      const learnSet = new Set(skillsToLearn.map((s) => s.toLowerCase()));
+      const teacherSkillsMap = new Map<string, { allTeachSkills: string[]; matchingSkills: string[] }>();
 
-      teachSkills?.forEach((teachSkill: any) => {
-        const profile = teachSkill.profiles;
-        if (!profile) return;
-
-        const skillLower = teachSkill.skill.toLowerCase();
-        if (skillsToLearn.some(learnSkill => 
-          skillLower.includes(learnSkill) || learnSkill.includes(skillLower)
-        )) {
-          const userId = profile.user_id;
-          
-          if (!userMatches.has(userId)) {
-            userMatches.set(userId, {
-              id: profile.id,
-              userId: profile.user_id, // Store the user_id for teacher_id
-              name: profile.name,
-              hostel: profile.hostel,
-              year: profile.year,
-              rating: profile.rating,
-              points: profile.points,
-              matchingSkills: [],
-              allTeachSkills: []
-            });
-          }
-
-          const match = userMatches.get(userId)!;
-          match.allTeachSkills.push(teachSkill.skill);
-          
-          if (!match.matchingSkills.includes(teachSkill.skill)) {
-            match.matchingSkills.push(teachSkill.skill);
-          }
+      (teachSkills || []).forEach((row: any) => {
+        const tId = row.user_id as string;
+        const skill = row.skill as string;
+        const skillLower = (skill || '').toLowerCase();
+        if (!teacherSkillsMap.has(tId)) {
+          teacherSkillsMap.set(tId, { allTeachSkills: [], matchingSkills: [] });
+        }
+        const bucket = teacherSkillsMap.get(tId)!;
+        bucket.allTeachSkills.push(skill);
+        if (learnSet.has(skillLower) && !bucket.matchingSkills.includes(skill)) {
+          bucket.matchingSkills.push(skill);
         }
       });
 
-      setMatches(Array.from(userMatches.values()));
+      // Keep only teachers with at least one matching skill
+      const teacherIds = Array.from(teacherSkillsMap.entries())
+        .filter(([, v]) => v.matchingSkills.length > 0)
+        .map(([k]) => k);
+
+      if (teacherIds.length === 0) {
+        setMatches([]);
+        return;
+      }
+
+      // Fetch profiles for matching teachers
+      const { data: profiles, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id,user_id,name,hostel,year,rating,points')
+        .in('user_id', teacherIds);
+
+      if (profilesError) {
+        console.error('Error fetching profiles for teachers:', profilesError);
+        return;
+      }
+
+      const result: Match[] = (profiles || []).map((p: any) => {
+        const buckets = teacherSkillsMap.get(p.user_id)!;
+        return {
+          id: p.id,
+          userId: p.user_id,
+          name: p.name,
+          hostel: p.hostel,
+          year: p.year,
+          rating: p.rating,
+          points: p.points,
+          matchingSkills: buckets.matchingSkills,
+          allTeachSkills: buckets.allTeachSkills,
+        } as Match;
+      });
+
+      setMatches(result);
     } catch (error) {
       console.error("Error processing matches:", error);
     }
