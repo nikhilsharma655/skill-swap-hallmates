@@ -269,7 +269,7 @@ const Index = () => {
           
           <div className="border-t border-border/20 pt-8 text-center">
             <p className="text-muted-foreground">
-              © 2024 SkillSwap. Made with ❤️ by students, for students.
+              © 2025 SkillSwap. Made with ❤️ by students, for students.
             </p>
           </div>
         </div>
