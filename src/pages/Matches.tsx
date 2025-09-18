@@ -186,7 +186,7 @@ const Matches = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Find Learning Partners</h1>
           <p className="text-muted-foreground">
@@ -208,7 +208,7 @@ const Matches = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
             {matches.map((match) => (
               <Card key={match.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader>

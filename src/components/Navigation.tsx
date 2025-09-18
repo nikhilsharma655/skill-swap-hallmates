@@ -4,11 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Home, User, Users, LogOut, MessageSquare } from "lucide-react";
+import { Home, User, Users, LogOut, MessageSquare, Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [user, setUser] = useState<any>(null);
   const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -19,7 +20,8 @@ const Navigation = () => {
         .from('match_requests')
         .select('id')
         .eq('teacher_id', userId)
-        .in('status', ['pending', 'accepted']);
+        .in('status', ['pending', 'accepted'])
+        .is('seen_at', null);
 
       if (error) {
         console.error('Error fetching requests count:', error);
@@ -134,59 +136,73 @@ const Navigation = () => {
           <div className="flex items-center space-x-4">
             {user ? (
               <>
-                <Button
-                  variant={isActive("/dashboard") ? "default" : "ghost"}
-                  size="sm"
-                  asChild
-                  className="rounded-full"
-                >
-                  <Link to="/dashboard" className="flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Dashboard
-                  </Link>
-                </Button>
-                
-                <Button
-                  variant={isActive("/matches") ? "default" : "ghost"}
-                  size="sm"
-                  asChild
-                  className="rounded-full"
-                >
-                  <Link to="/matches" className="flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    Find Partners
-                  </Link>
-                </Button>
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center space-x-2">
+                  <Button
+                    variant={isActive("/dashboard") ? "default" : "ghost"}
+                    size="sm"
+                    asChild
+                    className="rounded-full"
+                  >
+                    <Link to="/dashboard" className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      Dashboard
+                    </Link>
+                  </Button>
+                  
+                  <Button
+                    variant={isActive("/matches") ? "default" : "ghost"}
+                    size="sm"
+                    asChild
+                    className="rounded-full"
+                  >
+                    <Link to="/matches" className="flex items-center gap-2">
+                      <Users className="w-4 h-4" />
+                      Find Partners
+                    </Link>
+                  </Button>
 
-                <Button
-                  variant={isActive("/requests") ? "default" : "ghost"}
-                  size="sm"
-                  asChild
-                  className="rounded-full relative"
-                >
-                  <Link to="/requests" className="flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4" />
-                    Requests
-                    {pendingRequestsCount > 0 && (
-                      <Badge 
-                        variant="destructive" 
-                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px]"
-                      >
-                        {pendingRequestsCount > 99 ? '99+' : pendingRequestsCount}
-                      </Badge>
-                    )}
-                  </Link>
-                </Button>
+                  <Button
+                    variant={isActive("/requests") ? "default" : "ghost"}
+                    size="sm"
+                    asChild
+                    className="rounded-full relative"
+                  >
+                    <Link to="/requests" className="flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4" />
+                      Requests
+                      {pendingRequestsCount > 0 && (
+                        <Badge 
+                          variant="destructive" 
+                          className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px]"
+                        >
+                          {pendingRequestsCount > 99 ? '99+' : pendingRequestsCount}
+                        </Badge>
+                      )}
+                    </Link>
+                  </Button>
 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 rounded-full"
-                >
-                  <LogOut className="w-4 h-4" />
-                  Logout
-                </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 rounded-full"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </Button>
+                </div>
+
+                {/* Mobile menu button */}
+                <div className="md:hidden">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </div>
               </>
             ) : (
               <div className="flex items-center space-x-3">
@@ -211,6 +227,75 @@ const Navigation = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {isMobileMenuOpen && user && (
+        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+          <div className="px-4 py-3 space-y-3">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/dashboard");
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block text-sm font-medium transition-colors ${
+                isActive("/dashboard")
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Dashboard
+            </a>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/matches");
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block text-sm font-medium transition-colors ${
+                isActive("/matches")
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              }`}
+            >
+              Find Partners
+            </a>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/requests");
+                setIsMobileMenuOpen(false);
+              }}
+              className={`flex items-center justify-between text-sm font-medium transition-colors ${
+                isActive("/requests")
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              }`}
+            >
+              <span>Requests</span>
+              {pendingRequestsCount > 0 && (
+                <Badge variant="destructive" className="ml-2">
+                  {pendingRequestsCount}
+                </Badge>
+              )}
+            </a>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                handleLogout();
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full justify-start p-0 h-auto text-sm font-medium text-muted-foreground"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

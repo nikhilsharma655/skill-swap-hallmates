@@ -218,32 +218,35 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         {/* Profile Header */}
         {profile && (
-          <Card className="mb-8">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-2xl">{profile.name}</CardTitle>
-                  <CardDescription>
-                    {profile.hostel} • Year {profile.year} • {profile.email}
+          <Card className="mb-6 md:mb-8">
+            <CardHeader className="pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <CardTitle className="text-xl md:text-2xl truncate">{profile.name}</CardTitle>
+                  <CardDescription className="text-sm md:text-base mt-1">
+                    {profile.hostel} • Year {profile.year}
+                  </CardDescription>
+                  <CardDescription className="text-xs md:text-sm text-muted-foreground/80 mt-1 break-all">
+                    {profile.email}
                   </CardDescription>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 justify-end sm:justify-start">
                   <div className="text-center">
-                    <div className="flex items-center gap-1">
-                      <Award className="w-5 h-5 text-primary" />
-                      <span className="text-2xl font-bold">{profile.points}</span>
+                    <div className="flex items-center gap-1 justify-center">
+                      <Award className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                      <span className="text-lg md:text-2xl font-bold">{profile.points}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">Points</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">Points</p>
                   </div>
                   <div className="text-center">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-5 h-5 text-yellow-500" />
-                      <span className="text-2xl font-bold">{profile.rating.toFixed(1)}</span>
+                    <div className="flex items-center gap-1 justify-center">
+                      <Star className="w-4 h-4 md:w-5 md:h-5 text-yellow-500" />
+                      <span className="text-lg md:text-2xl font-bold">{profile.rating.toFixed(1)}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">Rating</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">Rating</p>
                   </div>
                 </div>
               </div>
@@ -251,7 +254,7 @@ const Dashboard = () => {
           </Card>
         )}
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Skills I Can Teach */}
           <Card>
             <CardHeader>
@@ -264,17 +267,18 @@ const Dashboard = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-2">
-                <Input
-                  placeholder="e.g., Web Development, Guitar, Photography"
-                  value={newTeachSkill}
-                  onChange={(e) => setNewTeachSkill(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && addTeachSkill()}
-                />
-                <Button onClick={addTeachSkill} size="icon">
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Input
+                    placeholder="e.g., Web Development, Guitar"
+                    value={newTeachSkill}
+                    onChange={(e) => setNewTeachSkill(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && addTeachSkill()}
+                    className="flex-1"
+                  />
+                  <Button onClick={addTeachSkill} size="icon" className="shrink-0">
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </div>
               
               <div className="space-y-2">
                 {teachSkills.map((skill) => (
@@ -311,17 +315,18 @@ const Dashboard = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-2">
-                <Input
-                  placeholder="e.g., Spanish, Cooking, Data Science"
-                  value={newLearnSkill}
-                  onChange={(e) => setNewLearnSkill(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && addLearnSkill()}
-                />
-                <Button onClick={addLearnSkill} size="icon">
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Input
+                    placeholder="e.g., Spanish, Cooking"
+                    value={newLearnSkill}
+                    onChange={(e) => setNewLearnSkill(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && addLearnSkill()}
+                    className="flex-1"
+                  />
+                  <Button onClick={addLearnSkill} size="icon" className="shrink-0">
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </div>
               
               <div className="space-y-2">
                 {learnSkills.map((skill) => (

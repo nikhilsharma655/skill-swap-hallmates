@@ -19,6 +19,7 @@ export type Database = {
           created_at: string
           id: string
           requester_id: string
+          seen_at: string | null
           skill: string
           status: string | null
           teacher_id: string
@@ -27,6 +28,7 @@ export type Database = {
           created_at?: string
           id?: string
           requester_id: string
+          seen_at?: string | null
           skill: string
           status?: string | null
           teacher_id: string
@@ -35,6 +37,7 @@ export type Database = {
           created_at?: string
           id?: string
           requester_id?: string
+          seen_at?: string | null
           skill?: string
           status?: string | null
           teacher_id?: string

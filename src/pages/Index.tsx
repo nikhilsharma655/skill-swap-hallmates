@@ -45,7 +45,7 @@ const Index = () => {
               />
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8 fade-in-up">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center pt-8 fade-in-up">
               <Button 
                 size="lg" 
                 className="group rounded-full px-8 py-6 text-lg font-semibold bg-gradient-to-r from-primary to-primary-glow hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl" 
@@ -79,7 +79,7 @@ const Index = () => {
               Discover the features that make learning and teaching seamless
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <Card className="card-hover border-0 card-shadow floating-card group">
               <CardHeader className="text-center pb-8 pt-8">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-glow rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
@@ -141,7 +141,7 @@ const Index = () => {
               Three simple steps to start your learning journey
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 max-w-6xl mx-auto">
             <div className="text-center space-y-8 group">
               <div className="relative">
                 <div className="w-24 h-24 bg-gradient-to-br from-primary to-primary-glow rounded-full flex items-center justify-center mx-auto shadow-2xl group-hover:scale-110 transition-all duration-500">
@@ -188,7 +188,7 @@ const Index = () => {
       <section className="py-24 section-gradient relative">
         <div className="floating-shapes"></div>
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
             <div className="space-y-4 group">
               <div className="text-5xl md:text-6xl font-black gradient-text group-hover:scale-110 transition-transform duration-300">500+</div>
               <div className="text-lg font-semibold text-muted-foreground">Active Students</div>
@@ -240,7 +240,7 @@ const Index = () => {
       <footer className="section-gradient py-16 border-t border-border/20 relative">
         <div className="floating-shapes"></div>
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 mb-8 md:mb-12">
             <div className="md:col-span-2">
               <div className="text-3xl font-black gradient-text mb-4">SkillSwap</div>
               <p className="text-muted-foreground mb-6 text-lg leading-relaxed max-w-md">

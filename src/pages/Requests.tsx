@@ -30,7 +30,23 @@ const Requests = () => {
 
   useEffect(() => {
     checkAuthAndLoadRequests();
+    markRequestsAsSeen();
   }, [navigate]);
+
+  const markRequestsAsSeen = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+
+      await supabase
+        .from('match_requests')
+        .update({ seen_at: new Date().toISOString() })
+        .eq('teacher_id', session.user.id)
+        .is('seen_at', null);
+    } catch (error) {
+      console.error('Error marking requests as seen:', error);
+    }
+  };
 
   const checkAuthAndLoadRequests = async () => {
     try {
@@ -127,7 +143,7 @@ const Requests = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Learning Requests</h1>
           <p className="text-muted-foreground">
@@ -135,15 +151,15 @@ const Requests = () => {
           </p>
         </div>
 
-        <Tabs defaultValue="incoming" className="space-y-6">
+        <Tabs defaultValue="incoming" className="space-y-4 md:space-y-6">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="incoming" className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Incoming ({incomingRequests.length})
+            <TabsTrigger value="incoming" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm">
+              <Users className="w-3 h-3 md:w-4 md:h-4" />
+              <span className="hidden sm:inline">Incoming</span> ({incomingRequests.length})
             </TabsTrigger>
-            <TabsTrigger value="outgoing" className="flex items-center gap-2">
-              <Send className="w-4 h-4" />
-              Outgoing ({outgoingRequests.length})
+            <TabsTrigger value="outgoing" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm">
+              <Send className="w-3 h-3 md:w-4 md:h-4" />
+              <span className="hidden sm:inline">Outgoing</span> ({outgoingRequests.length})
             </TabsTrigger>
           </TabsList>
 
@@ -188,7 +204,7 @@ const Requests = () => {
                         </div>
 
                         {request.status === 'pending' && (
-                          <div className="flex gap-2 pt-2">
+                          <div className="flex flex-col sm:flex-row gap-2 pt-2">
                             <Button
                               size="sm"
                               onClick={() => updateRequestStatus(request.id, 'accepted')}
